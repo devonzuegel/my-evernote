@@ -11,4 +11,4 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :evernote, ENV['EN_CONSUMER_KEY'], ENV['EN_SECRET_KEY'], client_options: { site: site }
 end
 
-OmniAuth.config.on_failure = LoginController.action(:oauth_failure)
+OmniAuth.config.on_failure = EvernoteLoginController.action(:oauth_failure)

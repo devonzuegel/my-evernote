@@ -1,2 +1,5 @@
 td= link_to user.name, user
 td= link_to user.email, user
+
+- if auth_token && @note
+  = @note[:content].html_safe

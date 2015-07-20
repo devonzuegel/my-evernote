@@ -1,3 +1,7 @@
 h3 User
 p Name: #{@user.name if @user.name}
 p Email: #{@user.email if @user.email}
+
+pre= "auth_token = \"#{auth_token}\""
+
+pre= JSON.pretty_generate(JSON.parse(@obj.to_json))
