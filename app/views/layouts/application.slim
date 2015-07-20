@@ -14,5 +14,9 @@ html
       ga('create', 'UA-65320911-1', 'auto');
       ga('send', 'pageview');
 
+  - if authtoken
+    == link_to 'Logout', logout_path
+  - else
+    == link_to 'Login via Evernote', '/auth/evernote'
   body
     = yield
