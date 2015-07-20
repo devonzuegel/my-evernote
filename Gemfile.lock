@@ -76,6 +76,10 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     erubis (2.7.0)
+    evernote-thrift (1.25.1)
+    evernote_oauth (0.2.3)
+      evernote-thrift
+      oauth (>= 0.4.1)
     execjs (2.5.2)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
@@ -85,6 +89,8 @@ GEM
     faker (1.4.3)
       i18n (~> 0.5)
     ffi (1.9.10)
+    figaro (1.1.1)
+      thor (~> 0.14)
     formatador (0.2.5)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
@@ -109,6 +115,7 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
+    hashie (3.4.1)
     hub (1.12.4)
     i18n (0.7.0)
     jbuilder (2.3.1)
@@ -141,6 +148,17 @@ GEM
     notiffany (0.0.6)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    oauth (0.4.7)
+    omniauth (1.2.2)
+      hashie (>= 1.2, < 4)
+      rack (~> 1.0)
+    omniauth-evernote (1.2.1)
+      evernote-thrift
+      multi_json (~> 1.0)
+      omniauth-oauth (~> 1.0)
+    omniauth-oauth (1.1.0)
+      oauth
+      omniauth (~> 1.0)
     orm_adapter (0.5.0)
     pg (0.18.2)
     pry (0.10.1)
@@ -290,8 +308,10 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   database_cleaner
   devise
+  evernote_oauth
   factory_girl_rails
   faker
+  figaro
   guard-bundler
   guard-rails
   guard-rspec
@@ -299,6 +319,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   launchy
+  omniauth-evernote
   pg
   quiet_assets
   rails (= 4.2.3)
