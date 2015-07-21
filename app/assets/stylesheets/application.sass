@@ -1,7 +1,4 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
  * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
  * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
  *
@@ -14,9 +11,13 @@
  *= require_self
  */
 
+@import 'partials'
 @import 'bootstrap-sprockets'
 @import 'bootstrap'
 @import 'foundation-icons'
+
+body
+  background-color: $lightest-grey
 
 i.large
   font-size: 16pt
@@ -37,3 +38,8 @@ i.large
 
 .padding-lg
   padding: 30px
+
+a
+  color: $green !important
+  &:hover
+    color: $dark-green !important

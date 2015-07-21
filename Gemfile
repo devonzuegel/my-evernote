@@ -29,6 +29,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'sqlite3'
   gem 'pry-rails'
+  gem 'awesome_print'
+  gem 'colorize'
 end
 group :development do
   gem 'better_errors'

@@ -41,6 +41,7 @@ GEM
     autoprefixer-rails (5.2.1.1)
       execjs
       json
+    awesome_print (1.6.1)
     bcrypt (3.1.10)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -70,6 +71,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1.1)
+    colorize (0.7.7)
     columnize (0.9.0)
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
@@ -319,11 +321,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print
   better_errors
   bootstrap-sass (~> 3.3.5)
   byebug
   capybara
   coffee-rails (~> 4.1.0)
+  colorize
   database_cleaner
   devise
   evernote_oauth

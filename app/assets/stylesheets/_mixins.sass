@@ -1,0 +1,81 @@
+/* Placeholder mixin
+ * ---------
+ * input {
+ *   @include input-placeholder {
+ *     color: #ccc;
+ *     background: #F00;
+ *   }
+ * }
+ */
+=placeholder
+  &.placeholder
+    @content
+  &::-webkit-input-placeholder
+    @content
+  &:-moz-placeholder
+    @content
+  &::-moz-placeholder
+    @content
+  &:-ms-input-placeholder
+    @content
+
+
+=box-shadow($color, $blur: 1px, $top: 1px, $left: 1px, $inset: false)
+  @if $inset
+    -webkit-box-shadow: inset $top $left $blur $color
+    -moz-box-shadow: inset $top $left $blur $color
+    box-shadow: inset $top $left $blur $color
+  @else
+    -webkit-box-shadow: $top $left $blur $color
+    -moz-box-shadow: $top $left $blur $color
+    box-shadow: $top $left $blur $color
+
+
+=text-field
+  display: inline-block
+  outline: none
+  text-decoration: none
+  font: 14px/100% Arial, Helvetica, sans-serif
+  padding: .5em
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3)
+  +rounded
+  +box-shadow(0, 1px, 2px, rgba(0, 0, 0, 0.2))
+
+
+=button($color: $red, $text_color: $white)
+  display: inline-block
+  outline: none
+  cursor: pointer
+  text-align: center
+  text-decoration: none
+  font: 14px/100% Arial, Helvetica, sans-serif
+  padding: .5em 2em .55em
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3)
+  +rounded
+  +box-shadow(0, 1px, 2px, rgba(0, 0, 0, 0.2))
+  color: $text_color !important
+  font-weight: bold
+  border: solid 1px darken($color, 18%)
+  background: $color
+  +gradient(saturate($color, 15%), darken($color, 15%))
+  &:hover
+    text-decoration: none
+    background: saturate($color, 10%)
+    +gradient(saturate($color, 5%), darken($color, 5%))
+  &:active
+    position: relative
+    top: 1px
+    color: saturate($color, 15%)
+    +gradient(saturate($color, 15%), lighten($color, 15%))
+
+
+=rounded($radius: 0.5em)
+  -webkit-border-radius: $radius
+  -moz-border-radius: $radius
+  border-radius: $radius
+
+
+=gradient($from, $to)
+  background: -webkit-gradient(linear, left top, left bottom, from($from), to($to))
+  background: -moz-linear-gradient(top, $from, $to)
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}')

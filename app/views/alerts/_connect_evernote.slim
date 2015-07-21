@@ -1,0 +1,5 @@
+- if user_signed_in? && auth_token.nil? && !onboarding?
+  .alert.alert-info
+    = link_to '/auth/evernote'
+      i.fi-social-evernote
+      |  Connect Evernote

@@ -1,6 +1,6 @@
 nav.navbar.navbar-default.navbar-fixed-top: .container-fluid.body-container
-
   .navbar-header
+    .vertical.spacer.pull-left
     button.navbar-toggle.collapsed type='button' data-toggle='collapse' data-target='#bs-example-navbar-collapse-1' aria-expanded='false'
       span.sr-only Toggle navigation
       span.icon-bar
@@ -8,25 +8,26 @@ nav.navbar.navbar-default.navbar-fixed-top: .container-fluid.body-container
       span.icon-bar
     a.navbar-brand href=root_path MyEvernote
 
-  #bs-example-navbar-collapse-1.collapse.navbar-collapse: ul.nav.navbar-nav.navbar-right
+  #bs-example-navbar-collapse-1.collapse.navbar-collapse
     form.navbar-form.navbar-left role='search'
-      div.form-group
-        input.form-control type='text' placeholder='Search'
+      .vertical.separator.pull-left
+      .vertical.spacer.pull-left
+      span.postfix: i.fi-magnifying-glass
+      input type='text' placeholder='Search notes'
       .hidden: button.btn.btn-default type='submit' Submit
 
-    li= link_to 'Users', users_path
-
-    - if user_signed_in?
-
-      li.dropdown
-        a.dropdown-toggle data-toggle='dropdown' aria-expanded='false' aria-haspopup='true' role='button'
-          i.fi-widget.large
-        ul.dropdown-menu
-          li= link_to 'Edit account', edit_user_registration_path
-          li= link_to 'Sign out', destroy_user_session_path, method: 'delete'
-
-    - else
-      li= link_to 'Sign in', new_user_session_path
-      li= link_to 'Sign up', new_user_registration_path
+    ul.nav.navbar-nav.navbar-right
+      - if user_signed_in?
+        li= link_to 'Users', users_path
+        li.dropdown
+          a.dropdown-toggle data-toggle='dropdown' aria-expanded='false' aria-haspopup='true' role='button'
+            i.fi-widget.large
+          ul.dropdown-menu
+            li= link_to 'Edit account', edit_user_registration_path
+            li= link_to 'Sign out', destroy_user_session_path, method: 'delete'
+      - else
+        li= link_to 'Sign in', new_user_session_path
+        li= link_to 'Sign up', new_user_registration_path
+      .vertical.spacer.pull-right
 
 .nav-spacer

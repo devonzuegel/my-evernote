@@ -10,12 +10,7 @@ html
 
   body: .body-container.padding-lg
 
-    - if user_signed_in? && auth_token.nil?
-      .alert.alert-info
-        = link_to '/auth/evernote'
-          i.fi-social-evernote
-          |  Connect Evernote
-
+    = render '/alerts/connect_evernote'
     = yield
 
 
