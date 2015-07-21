@@ -6,7 +6,6 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = csrf_meta_tags
 
-
   == render '/layouts/nav'
 
   body: .body-container
@@ -16,6 +15,7 @@ html
         = link_to '/auth/evernote'
           i.fi-social-evernote
           |  Connect Evernote
+
     = yield
 
 

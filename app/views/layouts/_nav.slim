@@ -9,17 +9,21 @@ nav.navbar.navbar-default.navbar-fixed-top: .container-fluid
       a.navbar-brand href=root_path MyEvernote
 
   #bs-example-navbar-collapse-1.collapse.navbar-collapse: ul.nav.navbar-nav.navbar-right
+    form.navbar-form.navbar-left role='search'
+      div.form-group
+        input.form-control type='text' placeholder='Search'
+      .hidden: button.btn.btn-default type='submit' Submit
+
     li= link_to 'Users', users_path
+
     - if user_signed_in?
-      li= link_to 'Sign out', destroy_user_session_path, method: 'delete'
-      li= link_to edit_user_registration_path
-        i.fi-widget.large
-      / li.dropdown
-      /   a.dropdown-toggle data-toggle='dropdown' aria-expanded='false' aria-haspopup='true' role='button'
-      /     i.fi-widget.large
-      /   ul.dropdown-menu
-      /     li= link_to 'Edit account', edit_user_registration_path
-      /     li= link_to 'Sign out', destroy_user_session_path, method: 'delete'
+
+      li.dropdown
+        a.dropdown-toggle data-toggle='dropdown' aria-expanded='false' aria-haspopup='true' role='button'
+          i.fi-widget.large
+        ul.dropdown-menu
+          li= link_to 'Edit account', edit_user_registration_path
+          li= link_to 'Sign out', destroy_user_session_path, method: 'delete'
 
     - else
       li= link_to 'Sign in', new_user_session_path

@@ -10,24 +10,28 @@ class UsersController < ApplicationController
 
     if auth_token.present?
       client = EvernoteOAuth::Client.new(token: auth_token)
-      @auth_token = auth_token
-      note_store = client.note_store
-      @notebooks = note_store.listNotebooks(auth_token)
-      @user = client.user_store.getUser(auth_token)
-      @metadata = note_store.findNotesMetadata(filter, 0, 100, notes_metadata_result_spec)
-      @note = note_store.getNote(auth_token, @metadata.notes.first.guid, true, true, true, true)
-      @note = format_note(@note)
-      @counts = note_store.findNoteCounts(auth_token, filter, false)
+      begin
+        @auth_token = auth_token
+        note_store = client.note_store
+        @notebooks = note_store.listNotebooks(auth_token)
+        @user = client.user_store.getUser(auth_token)
+        @metadata = note_store.findNotesMetadata(filter, 0, 100, notes_metadata_result_spec)
+        @note = note_store.getNote(auth_token, @metadata.notes.first.guid, true, true, true, true)
+        @note = format_note(@note)
+        @counts = note_store.findNoteCounts(auth_token, filter, false)
 
-      @obj = {
-        note_store: {
-          notebooks: @notebooks,
-          metadata: @metadata,
-          note: @note,
-          counts: @counts
-        },
-        user: @user,
-      }
+        @obj = {
+          note_store: {
+            notebooks: @notebooks,
+            metadata: @metadata,
+            note: @note,
+            counts: @counts
+          },
+          user: @user,
+        }
+      rescue => e
+        @obj = e
+      end
     end
 
     # unless @user == current_user

@@ -24,7 +24,11 @@ group :development, :test do
   gem 'byebug'
   gem 'web-console',              '~> 2.0'
   gem 'spring'
-  gem 'webmock'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'rspec-rails'
+  gem 'sqlite3'
+  gem 'pry-rails'
 end
 group :development do
   gem 'better_errors'
@@ -39,17 +43,13 @@ group :development do
   gem 'rb-inotify',               :require => false
   gem 'spring-commands-rspec'
 end
-group :development, :test do
-  gem 'factory_girl_rails'
-  gem 'faker'
-  gem 'rspec-rails'
-  gem 'sqlite3'
-end
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
 group :test do
+  gem 'webmock'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
