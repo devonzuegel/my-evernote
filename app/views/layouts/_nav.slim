@@ -18,6 +18,7 @@ nav.navbar.navbar-default.navbar-fixed-top: .container-fluid.body-container
 
     ul.nav.navbar-nav.navbar-right
       - if user_signed_in?
+        li= link_to 'Profile', user_path(current_user.id)
         li= link_to 'Users', users_path
         li.dropdown
           a.dropdown-toggle data-toggle='dropdown' aria-expanded='false' aria-haspopup='true' role='button'
