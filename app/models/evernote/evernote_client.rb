@@ -65,6 +65,7 @@ class EvernoteClient
 
     def format_note(note)
       {
+        guid: note.guid,
         title: note.title,
         content: note.content,
         content_length: note.contentLength,

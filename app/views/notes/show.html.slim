@@ -1,0 +1,33 @@
+p#notice = notice
+
+p
+  strong Guid:
+  = @note.guid
+p
+  strong Title:
+  = @note.title
+p
+  strong Content:
+  = @note.content
+p
+  strong En created at:
+  = @note.en_created_at
+p
+  strong En updated at:
+  = @note.en_updated_at
+p
+  strong Active:
+  = @note.active
+p
+  strong Notebook guid:
+  = @note.notebook_guid
+p
+  strong Author:
+  = @note.author
+p
+  strong Notebook:
+  = @note.notebook
+
+= link_to 'Edit', edit_note_path(@note)
+'|
+= link_to 'Back', notes_path

@@ -1,0 +1,12 @@
+= simple_form_for(@notebook) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :guid
+    = f.input :name
+    = f.input :en_created_at
+    = f.input :en_updated_at
+    = f.association :user
+
+  .form-actions
+    = f.button :submit

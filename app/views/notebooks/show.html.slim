@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Guid:
+  = @notebook.guid
+p
+  strong Name:
+  = @notebook.name
+p
+  strong En created at:
+  = @notebook.en_created_at
+p
+  strong En updated at:
+  = @notebook.en_updated_at
+p
+  strong User:
+  = @notebook.user
+
+= link_to 'Edit', edit_notebook_path(@notebook)
+'|
+= link_to 'Back', notebooks_path

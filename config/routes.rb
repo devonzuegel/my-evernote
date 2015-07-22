@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
+  resources :notes
+  resources :notebooks
   root to: 'visitors#index'
-  devise_for :users, controllers: { sessions: 'registrations/sessions' }
+  devise_for :users, controllers: {  # Add others if customized.
+    sessions: 'registrations/sessions',
+    registrations: 'registrations/registrations'
+  }
   resources :users
 
   get '/connect'                 => 'evernote_login#onboarding', as: :onboarding
