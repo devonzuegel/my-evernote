@@ -1,6 +1,6 @@
 class VisitorsController < ApplicationController
   def index
-    #### Display others' public notes
+    @notes = Note.all
+    @notebooks = Notebook.all
   end
-
 end

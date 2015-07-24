@@ -1,10 +1,9 @@
 FactoryGirl.define do
   factory :notebook do
-    guid "MyString"
-name "MyString"
-en_created_at "2015-07-22 12:57:06"
-en_updated_at "2015-07-22 12:57:06"
-user nil
+    guid { Faker::Lorem.characters(20) }
+    name { Faker::Lorem.sentence }
+    en_created_at { Faker::Time.between(20.days.ago, 10.days.ago) }
+    en_updated_at { Faker::Time.between(10.days.ago, 1.day.ago) }
   end
 
 end

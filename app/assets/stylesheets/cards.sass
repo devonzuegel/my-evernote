@@ -1,0 +1,34 @@
+@import '_partials'
+
+.card
+  background-color: white
+  +box-shadow($light-grey, 1px, 0px, 0px)
+  @extend .padding-md
+  +rounded
+
+  .date
+    text-transform: uppercase
+    color: $light-grey
+    font-family: $decorator-font
+
+.divider
+  width: 100%
+  margin: auto
+  margin-top: -10px
+  height: 30px
+  position: relative
+  .line
+    position: absolute
+    left: 50%
+    transform: translateX(-50%)
+    top: 8px
+    width: 40%
+    height: 1px
+    background-color: $lighter-grey
+  .text
+    left: 50%
+    transform: translateX(-50%)
+    position: absolute
+    background-color: $lightest-grey
+    padding: 0 10px
+    @extend .inactive

@@ -5,19 +5,30 @@ class EvernoteClient
 
   def initialize(attributes = {})
     @auth_token = attributes.fetch(:auth_token)
+    @user_id = attributes.fetch(:user_id)
     @client = EvernoteOAuth::Client.new(token: @auth_token)
     ping_evernote
   end
 
   def notebooks
-    note_store.listNotebooks(@auth_token)
+    result = []
+    note_store.listNotebooks(@auth_token).each do |n|
+      result << {
+        en_created_at: timestamp_to_datetime(n.serviceCreated),
+        en_updated_at: timestamp_to_datetime(n.serviceUpdated),
+        guid: n.guid,
+        name: n.name,
+        user_id: @user_id
+      }
+    end
+    result
   end
 
   def notebook_counts
     note_store.findNoteCounts(@auth_token, filter, false)
   end
 
-  def user
+  def en_user
     user_store.getUser(@auth_token)
   end
 
@@ -26,28 +37,15 @@ class EvernoteClient
   end
 
   def notes
-    notes_metadata.notes
+    note_guids = notes_metadata.notes.map { |n| n.guid }
+    notes = note_guids.map { |guid| find_note_by_guid(guid) }
   end
 
-  def first_note
-    note = note_store.getNote(@auth_token, notes.first.guid, true, true, true, true)
+  def find_note_by_guid(guid)
+    note = note_store.getNote(@auth_token, guid, true, true, true, true)
     format_note(note)
   end
 
-    #     @obj = {
-    #       note_store: {
-    #         notebooks: @notebooks,
-    #         metadata: @metadata,
-    #         note: @note,
-    #         counts: @counts
-    #       },
-    #       user: @user,
-    #     }
-    #     ap @obj
-    #   rescue => e
-    #     @obj = e
-    #   end
-    # end
   private
     def user_store
       @client.user_store
@@ -69,12 +67,12 @@ class EvernoteClient
         title: note.title,
         content: note.content,
         content_length: note.contentLength,
-        created: note.created,
-        updated: note.updated,
+        en_created_at: timestamp_to_datetime(note.created),
+        en_updated_at: timestamp_to_datetime(note.updated),
         active: note.active,
         # update_seq_num: note.updateSequenceNum,
         notebook_guid: note.notebookGuid,
-        attributes: { author: note.attributes.author }
+        author: note.attributes.author
       }
     end
 
@@ -91,5 +89,10 @@ class EvernoteClient
         includeDeleted: true,
         # includeUpdateSequenceNum: true,
       )
+    end
+
+    def timestamp_to_datetime(timestamp)
+      epoch = timestamp.to_s.chomp('000')
+      DateTime.strptime(epoch, '%s')
     end
 end

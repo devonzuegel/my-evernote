@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    en_client = EvernoteClient.new(auth_token: auth_token)
+    en_client = EvernoteClient.new(auth_token: auth_token, user_id: current_user.id)
     @obj = {
       notebooks: en_client.notebooks,
       # notebook_counts: en_client.notebook_counts,
@@ -17,15 +17,5 @@ class UsersController < ApplicationController
     # unless @user == current_user
     #   redirect_to :back, alert: 'Access denied.'
     # end
-  end
-
-  def edit
-    puts "\n\nHIIIIIIIII\n\n".yellow
-    super
-  end
-
-  def update
-    puts "\n\nHIIIIIIIII\n\n".yellow
-    super
   end
 end

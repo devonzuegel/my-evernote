@@ -9,5 +9,7 @@ class CreateNotebooks < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    add_index :notebooks, :guid, unique: true
   end
 end

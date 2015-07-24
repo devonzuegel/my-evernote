@@ -1,0 +1,15 @@
+h3.bottom-space Notes
+.row
+  - if @notes.empty?
+    = render partial: 'components/divider', locals: { text: "You don't have any notes!" }
+  - else
+    - for note in @notes
+      pre= JSON.pretty_generate(note.as_json)
+
+h3.bottom-space Notebooks
+.row
+  - if @notebooks.empty?
+    .centered.inactive You don't have any notebooks!
+  - else
+    - for notebook in @notebooks
+      .col-sm-4: .card= render partial: 'notebook', locals: { notebook: notebook }

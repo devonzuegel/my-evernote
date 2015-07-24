@@ -1,5 +1,12 @@
 h3 User
-p Name: #{current_user.name if current_user.name}
-p Email: #{current_user.email if current_user.email}
+p
+  b Name:
+  span: code= current_user.name || 'nil'
+p
+  b Email:
+  span: code= current_user.email || 'nil'
+p
+  b Token:
+  span: code= current_user.auth_token || 'nil'
 
-pre= JSON.pretty_generate(JSON.parse(@obj.to_json))
+pre= JSON.pretty_generate(@obj.as_json)
