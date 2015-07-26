@@ -30,8 +30,5 @@ table
         td = note.notebook
         td = link_to 'Show', note
         td = link_to 'Edit', edit_note_path(note)
-        td = link_to 'Destroy', note, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
-
-= link_to 'New Note', new_note_path

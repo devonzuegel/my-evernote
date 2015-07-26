@@ -10,7 +10,10 @@ feature 'Home page' do
   #   Then I see "Welcome"
   scenario 'visit the home page' do
     visit root_path
-    expect(page).to have_content 'Welcome'
+    expect(page).to have_content 'Notes'
+    expect(page).to have_content 'Notebooks'
+    Note.all.each { |note| expect(page).to have_content(note.title) }
+    Notebook.all.each { |nb| expect(page).to have_content(nb.name) }
   end
 
 end

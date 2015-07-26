@@ -4,6 +4,7 @@
   background-color: white
   +box-shadow($light-grey, 1px, 0px, 0px)
   @extend .padding-md
+  margin: 15px 0
   +rounded
 
   .date
@@ -32,3 +33,12 @@
     background-color: $lightest-grey
     padding: 0 10px
     @extend .inactive
+
+.tag
+  font-family: $decorator-font
+  font-size: .9em
+  color: white
+  background-color: $green
+  +rounded
+  padding: 1px 5px
+  display: inline-block

@@ -31,6 +31,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'awesome_print'
   gem 'colorize'
+  gem 'fuubar'
 end
 group :development do
   gem 'better_errors'

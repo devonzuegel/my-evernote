@@ -22,8 +22,3 @@ table
         td = notebook.user
         td = link_to 'Show', notebook
         td = link_to 'Edit', edit_notebook_path(notebook)
-        td = link_to 'Destroy', notebook, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= link_to 'New Notebook', new_notebook_path

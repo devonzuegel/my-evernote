@@ -13,12 +13,9 @@ RSpec.describe "notebooks/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", notebook_path(@notebook), "post" do
-
       assert_select "input#notebook_guid[name=?]", "notebook[guid]"
-
       assert_select "input#notebook_name[name=?]", "notebook[name]"
-
-      assert_select "input#notebook_user_id[name=?]", "notebook[user_id]"
+      assert_select "select#notebook_user_id[name=?]", "notebook[user_id]"
     end
   end
 end

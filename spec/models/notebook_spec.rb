@@ -35,4 +35,20 @@ RSpec.describe Notebook, type: :model do
       expect(Notebook.first[:name]).to eq notebook[:name]
     end
   end
+
+  describe 'Creating a new notebook' do
+    it 'adds a new valid notebook' do
+      expect { create(:notebook) }.to change { Notebook.count }.by 1
+    end
+
+    it 'should not create a notebook with a blank guid' do
+      expect { Notebook.create! }.to raise_error ActiveRecord::RecordInvalid
+    end
+
+    it 'should not create a notebook with a non-unique guid' do
+      same_guid = Faker::Lorem.characters(20)
+      create(:notebook, guid: same_guid)
+      expect { create(:notebook, guid: same_guid) }.to raise_error ActiveRecord::RecordInvalid
+    end
+  end
 end

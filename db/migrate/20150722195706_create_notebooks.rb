@@ -1,7 +1,7 @@
 class CreateNotebooks < ActiveRecord::Migration
   def change
     create_table :notebooks do |t|
-      t.string :guid
+      t.string :guid, null: false
       t.string :name
       t.timestamp :en_created_at
       t.timestamp :en_updated_at
