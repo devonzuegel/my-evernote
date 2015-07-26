@@ -1,5 +1,6 @@
-h2= note.title
+h3= note.title
 .date #{distance_of_time_in_words(note.en_updated_at, DateTime.now)} ago
 = note.content.html_safe
-- %w(tag1 tag2 tag3).each do |tag|
-  .tag= tag
+.div
+  - %w(tag1 tag2 tag3).each do |tag|
+    .tag= tag

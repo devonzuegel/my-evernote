@@ -1,15 +1,9 @@
-h3.top-space Notes
-.row
-  - if @notes.empty?
-    = render partial: 'components/divider', locals: { text: "You don't have any notes!" }
-  - else
+.top-space.invisible Notes
+.div
+  = render partial: 'components/divider', locals: { text: "Notes" }
+- if @notes.empty?
+  = render partial: 'components/divider', locals: { text: "You don't have any notes!" }
+- else
+  .wrapper.tiles
     - for note in @notes
-      .col-sm-6: .card= render partial: 'note', locals: { note: note }
-
-h3.top-space Notebooks
-.row
-  - if @notebooks.empty?
-    .centered.inactive You don't have any notebooks!
-  - else
-    - for notebook in @notebooks
-      .col-sm-4: .card= render partial: 'notebook', locals: { notebook: notebook }
+      .tiled.card= render partial: 'note', locals: { note: note }
