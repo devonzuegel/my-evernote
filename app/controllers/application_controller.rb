@@ -22,4 +22,5 @@ class ApplicationController < ActionController::Base
     from_session = User.find(session[:current_user_id]) unless session[:current_user_id].nil?
     from_devise || from_session
   end
+
 end

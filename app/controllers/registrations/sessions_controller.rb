@@ -9,7 +9,9 @@ class Registrations::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     super
-    session[:user_id] = current_user.id unless current_user.nil?
+    return if current_user.nil?
+    session[:user_id] = current_user.id
+    # current_user.sync
   end
 
   # DELETE /resource/sign_out

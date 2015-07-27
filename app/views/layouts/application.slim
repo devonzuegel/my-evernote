@@ -2,16 +2,16 @@ doctype html
 html
   head
     title MyEvernote
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = csrf_meta_tags
 
   == render '/layouts/nav'
 
-  body: .body-container.padding-lg
-    = render '/alerts/connect_evernote'
-    = render '/alerts/errors'
-    = yield
+  body onUnload=''
+    .body-container.padding-lg
+      = render '/alerts/connect_evernote'
+      = render '/alerts/errors'
+      = yield
 
 
   javascript:
@@ -21,3 +21,5 @@ html
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
     ga('create', 'UA-65320911-1', 'auto');
     ga('send', 'pageview');
+
+= javascript_include_tag 'application', 'data-turbolinks-track' => true

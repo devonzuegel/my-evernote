@@ -52,4 +52,19 @@ RSpec.describe Note, type: :model do
       expect { create(:note, guid: same_guid) }.to raise_error ActiveRecord::RecordInvalid
     end
   end
+
+  describe "Acceessing the note's notebook" do
+    it 'should get the notebook with the same notebook_guid' do
+      notebook_guid = Faker::Lorem.characters(20)
+      notebook = create(:notebook, guid: notebook_guid)
+      note = create(:note, notebook_guid: notebook_guid)
+      expect(note.notebook). to eq notebook
+    end
+
+    it 'should get the notebook with the same notebook_id' do
+      notebook = create(:notebook)
+      note = create(:note, notebook_id: notebook.id)
+      expect(note.notebook).to eq notebook
+    end
+  end
 end

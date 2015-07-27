@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :users
 
   get '/connect'                 => 'evernote_login#onboarding', as: :onboarding
+  get '/refresh'                 => 'evernote_login#refresh', as: :refresh
   get '/auth/:provider/callback' => 'evernote_login#callback'
   get '/logout'                  => 'evernote_login#logout', as: :logout
   get '/oauth_failure'           => 'evernote_login#oauth_failure'

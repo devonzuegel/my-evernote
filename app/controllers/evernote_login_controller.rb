@@ -11,6 +11,11 @@ class EvernoteLoginController < ApplicationController
     redirect_to root_path
   end
 
+  def refresh
+    current_user.sync unless current_user.nil?
+    redirect_to :back, flash: { info: 'Sync complete!' }
+  end
+
   def oauth_failure
     redirect_to root_path
   end

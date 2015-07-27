@@ -5,4 +5,8 @@ class Note < ActiveRecord::Base
   def self.sync(attributes)
     NoteSync.new.sync(attributes)
   end
+
+  def notebook
+    (Notebook.where(guid: notebook_guid) | Notebook.where(id: notebook_id)).first
+  end
 end

@@ -51,4 +51,18 @@ RSpec.describe Notebook, type: :model do
       expect { create(:notebook, guid: same_guid) }.to raise_error ActiveRecord::RecordInvalid
     end
   end
+
+  describe "accessing the notebook's notes" do
+    it 'should get the notes with the same notebook_guid' do
+      notebook = build(:notebook, guid: Faker::Lorem.characters(20))
+      notes = 3.times.map { create(:note, notebook_guid: notebook.guid) }
+      expect(notebook.notes).to match_array notes
+    end
+
+    it 'should get the notes with the same notebook_id' do
+      notebook = build(:notebook)
+      notes = 3.times.map { create(:note, notebook_id: notebook.id) }
+      expect(notebook.notes).to match_array notes
+    end
+  end
 end

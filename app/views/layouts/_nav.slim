@@ -20,6 +20,8 @@ nav.navbar.navbar-default.navbar-fixed-top: .container-fluid.body-container
       - if user_signed_in?
         li= link_to 'Profile', user_path(current_user.id)
         li= link_to 'Users', users_path
+        - if current_user.has_valid_token?
+          li: a href='/refresh': i.fi-refresh.large
         li.dropdown
           a.dropdown-toggle data-toggle='dropdown' aria-expanded='false' aria-haspopup='true' role='button'
             i.fi-widget.large

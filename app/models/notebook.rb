@@ -7,4 +7,8 @@ class Notebook < ActiveRecord::Base
     NotebookSync.new.sync(attributes)
   end
 
+  def notes
+    (Note.where(notebook_guid: guid) | Note.where(notebook_id: id)).uniq
+  end
+
 end

@@ -8,9 +8,9 @@
 admin = CreateAdminService.new.call
 user  = User.create(name: 'Devon', email: 'devonzuegel@gmail.com', password: 'password')
 
-10.times do
-  Note.create(title: Faker::Lorem.sentence,
-              en_updated_at: Faker::Time.between(2.days.ago, Time.now),
-              content: Faker::Lorem.paragraph,
-              guid: Faker::Lorem.characters(20) )
-end
+# 10.times do
+#   Note.create(title: Faker::Lorem.sentence,
+#               en_updated_at: Faker::Time.between(2.days.ago, Time.now),
+#               content: Faker::Lorem.paragraph,
+#               guid: Faker::Lorem.characters(20) )
+# end

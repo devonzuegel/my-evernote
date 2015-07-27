@@ -1,9 +1,7 @@
 .top-space.invisible Notes
 .div
   = render partial: 'components/divider', locals: { text: "Notes" }
-- if @notes.empty?
-  = render partial: 'components/divider', locals: { text: "You don't have any notes!" }
-- else
+- unless @notes.empty?
   .wrapper.tiles
     - for note in @notes
       .tiled.card= render partial: 'note', locals: { note: note }

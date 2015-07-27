@@ -66,7 +66,7 @@ class EvernoteClient
         guid: note.guid,
         title: note.title,
         content: note.content,
-        content_length: note.contentLength,
+        # content_length: note.contentLength,
         en_created_at: timestamp_to_datetime(note.created),
         en_updated_at: timestamp_to_datetime(note.updated),
         active: note.active,
