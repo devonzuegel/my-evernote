@@ -20,7 +20,7 @@ class AbstractSync
   private
 
   def resource
-    @resource ||= model_class.find_by(guid: attribute(:guid))
+    @resource ||= model_class.find_by(attributes.slice(:guid))
   end
 
   def resource?
@@ -28,7 +28,7 @@ class AbstractSync
   end
 
   def updated?
-    resource[:en_updated_at].nil? || resource[:en_updated_at] < attribute(:en_updated_at)
+    resource.en_updated_at.blank? || resource.en_updated_at < attribute(:en_updated_at)
   end
 
   def attribute(name)
