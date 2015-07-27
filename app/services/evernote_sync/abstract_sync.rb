@@ -18,8 +18,15 @@ class AbstractSync
 
   private
 
-  def updated?(resource)
-    en_updated_at = attributes.fetch(:en_updated_at)
-    resource[:en_updated_at].nil? || resource[:en_updated_at] < en_updated_at
+  def resource
+    @resource ||= generic_class.find_by(guid: attribute(:guid))
+  end
+
+  def updated?
+    resource[:en_updated_at].nil? || resource[:en_updated_at] < attribute(:en_updated_at)
+  end
+
+  def attribute(name)
+    attributes.fetch(name)
   end
 end
