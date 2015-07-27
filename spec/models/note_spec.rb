@@ -6,36 +6,24 @@ RSpec.describe Note, type: :model do
     let(:first_note) { Note.first }
 
     context 'when the guid is new' do
-      let(:attributes) { build(:note).attributes }
+      let(:attributes) { attributes_for(:note) }
 
       it { should change(Note, :count).from(0).to(1) }
     end
 
     context 'when the guid is in the database' do
       let!(:note) { create(:note, en_updated_at: 2.days.ago) }
-      let(:attributes) do
-        {
-          guid: note['guid'],
-          title: 'A different title!',
-          en_updated_at: Time.now
-        }
-      end
+      let(:attributes) { attributes_for(:note, guid: note.guid, en_updated_at: Time.now) }
 
       it 'updates' do
         expect(sync).to_not change(Note, :count)
-        expect(first_note.title).to eq(attributes[:title])
+        expect(first_note.title).to eq(attributes.fetch(:title))
       end
     end
 
     context 'when the guid is in the database but update is the same' do
       let!(:note) { create(:note, en_updated_at: 2.days.ago) }
-      let(:attributes) do
-        {
-          guid: note['guid'],
-          title: 'A different title!',
-          en_updated_at: note['en_updated_at']
-        }
-      end
+      let(:attributes) { attributes_for(:note, guid: note.guid, en_updated_at: note.en_updated_at) }
 
       it 'does not update' do
         expect(sync).to_not change(Note, :count)
