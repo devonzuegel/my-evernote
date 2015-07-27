@@ -1,5 +1,5 @@
-- if user_signed_in? && !current_user.has_valid_token?
+- if user_signed_in? && !current_user.has_valid_token? && !onboarding?
   .alert.alert-info
-    = link_to '/auth/evernote'
-      i.fi-social-evernote
-      |  #{current_user.token_status.to_s.humanize} your Evernote account
+    .centered.large= link_to '/auth/evernote'
+      i.fi-social-evernote.padding-sm
+      | #{current_user.token_status.to_s.humanize} your Evernote account

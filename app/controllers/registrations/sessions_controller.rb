@@ -11,7 +11,7 @@ class Registrations::SessionsController < Devise::SessionsController
     super
     return if current_user.nil?
     session[:user_id] = current_user.id
-    # current_user.sync
+    current_user.sync
   end
 
   # DELETE /resource/sign_out
@@ -27,6 +27,6 @@ class Registrations::SessionsController < Devise::SessionsController
   # end
 
   def after_sign_in_path_for(resource)
-    onboarding_path
+    current_user.auth_token.nil? ? onboarding_path : super(resource)
   end
 end
