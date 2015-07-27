@@ -1,37 +1,47 @@
 require 'rails_helper'
 
 RSpec.describe Note, type: :model do
-  describe 'Syncing notes from evernote' do
-    it 'should create a new notebook if it cannot find one with the provided guid' do
-      expect(Note.count).to eq 0
-      Note.sync(build(:note).attributes)
-      expect(Note.count).to eq 1
+  describe '.sync' do
+    subject(:sync) { -> { Note.sync(attributes) } }
+    let(:first_note) { Note.first }
+
+    context 'when the guid is new' do
+      let(:attributes) { build(:note).attributes }
+
+      it { should change(Note, :count).from(0).to(1) }
     end
 
-    it 'should updated the existing notebook that has the provided guid' do
-      note = create(:note, en_updated_at: 2.days.ago)
-      expect(Note.count).to eq 1
-      updated_attrs = {
-        guid: note['guid'],
-        title: 'A different title!',
-        en_updated_at: Time.now
-      }
-      Note.sync(updated_attrs)
-      expect(Note.count).to eq 1
-      expect(Note.first[:title]).to eq updated_attrs[:title]
+    context 'when the guid is in the database' do
+      let!(:note) { create(:note, en_updated_at: 2.days.ago) }
+      let(:attributes) do
+        {
+          guid: note['guid'],
+          title: 'A different title!',
+          en_updated_at: Time.now
+        }
+      end
+
+      it 'updates' do
+        expect(sync).to_not change(Note, :count)
+        expect(first_note.title).to eq(attributes[:title])
+      end
     end
 
-    it 'should not change an existing notebook with an equivalent update date' do
-      note = create(:note, en_updated_at: 2.days.ago)
-      expect(Note.count).to eq 1
-      updated_attrs = {
-        guid: note['guid'],
-        title: 'A different title!',
-        en_updated_at: note['en_updated_at']
-      }
-      Note.sync(updated_attrs)
-      expect(Note.count).to eq 1
-      expect(Note.first[:title]).to eq note[:title]
+    context 'when the guid is in the database but update is the same' do
+      let!(:note) { create(:note, en_updated_at: 2.days.ago) }
+      let(:attributes) do
+        {
+          guid: note['guid'],
+          title: 'A different title!',
+          en_updated_at: note['en_updated_at']
+        }
+      end
+
+      it 'does not update' do
+        expect(sync).to_not change(Note, :count)
+        expect(first_note.title).to eq(note.title)
+        expect(first_note.title).to_not eq(attributes.fetch(:title))
+      end
     end
   end
 
