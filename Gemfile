@@ -34,6 +34,8 @@ group :development, :test do
   gem 'fuubar'
   gem 'capybara'
 
+  gem 'coveralls', require: false
+
   # rails test helpers
   gem 'shoulda-matchers', '3.0.0.rc1', require: false
 

@@ -1,6 +1,5 @@
 class Note < ActiveRecord::Base
-  belongs_to :notebook_by_id,
-             class_name: 'Notebook'
+  belongs_to :notebook, class_name: 'Notebook'
 
   belongs_to :notebook_by_guid,
              class_name: 'Notebook',
