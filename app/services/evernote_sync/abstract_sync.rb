@@ -3,7 +3,7 @@ class AbstractSync
 
   def sync(attributes = {})
     guid = attributes.symbolize_keys!.fetch(:guid)
-    resource = generic_class.where(guid: guid).first
+    resource = generic_class.find_by(guid: guid)
     if resource.nil?
       resource = generic_class.create(attributes)
     elsif updated?(resource, attributes)
