@@ -1,5 +1,12 @@
 class Note < ActiveRecord::Base
-  belongs_to :notebook
+  belongs_to :notebook_by_id,
+             class_name: 'Notebook'
+
+  belongs_to :notebook_by_guid,
+             class_name: 'Notebook',
+             foreign_key: :notebook_guid,
+             primary_key: :guid
+
   validates :guid, uniqueness: true, presence: true
 
   def self.sync(attributes)
@@ -7,6 +14,6 @@ class Note < ActiveRecord::Base
   end
 
   def notebook
-    (Notebook.where(guid: notebook_guid) | Notebook.where(id: notebook_id)).first
+    Notebook.find_by('id = ? OR guid = ?', notebook_id, notebook_guid)
   end
 end
