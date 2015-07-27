@@ -7,19 +7,19 @@ class AbstractSync
   end
 
   def sync
-    guid = attributes.fetch(:guid)
-    resource = generic_class.find_by(guid: guid)
-    if resource.nil?
-      resource = generic_class.create(attributes)
-    elsif updated?(resource)
-      resource.update_attributes(attributes)
-    end
+    return generic_class.create(attributes) unless resource?
+
+    resource.update_attributes(attributes) if updated?
   end
 
   private
 
   def resource
     @resource ||= generic_class.find_by(guid: attribute(:guid))
+  end
+
+  def resource?
+    resource.present?
   end
 
   def updated?
