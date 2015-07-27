@@ -3,7 +3,7 @@ class Note < ActiveRecord::Base
   validates :guid, uniqueness: true, presence: true
 
   def self.sync(attributes)
-    NoteSync.new.sync(attributes)
+    NoteSync.new(attributes).sync
   end
 
   def notebook
