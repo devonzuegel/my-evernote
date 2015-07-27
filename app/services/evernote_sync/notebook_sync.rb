@@ -1,6 +1,11 @@
 class NotebookSync < AbstractSync
   def initialize(*)
     super
-    @generic_class = Notebook
+  end
+
+  protected
+
+  def model_class
+    Notebook
   end
 end

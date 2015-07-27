@@ -14,6 +14,11 @@ class NoteSync < AbstractSync
     super
 
     @attributes.slice!(*SYNCED_ATTRIBUTES)
-    @generic_class = Note
+  end
+
+  protected
+
+  def model_class
+    Note
   end
 end
