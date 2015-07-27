@@ -10,5 +10,4 @@ class Notebook < ActiveRecord::Base
   def notes
     (Note.where(notebook_guid: guid) | Note.where(notebook_id: id)).uniq
   end
-
 end

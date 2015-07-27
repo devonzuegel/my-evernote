@@ -6,14 +6,14 @@ class User < ActiveRecord::Base
   has_many :notebooks
 
   def notes
-    notebooks.collect { |nb| nb.notes }.flatten.uniq
+    notebooks.collect(&:notes).flatten.uniq
   end
 
   def sync
     unless auth_token.nil?
-      e = EvernoteClient.new(auth_token: auth_token, user_id: id)
-      e.notebooks.each { |n| Notebook.sync(n) }
-      e.notes.each { |n| Note.sync(n) }
+      en_client = EvernoteClient.new(auth_token: auth_token, user_id: id)
+      en_client.notebooks.each { |notebook| Notebook.sync(notebook) }
+      en_client.notes.each { |note| Note.sync(note) }
     end
   end
 
@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
     rescue Evernote::EDAM::Error::EDAMUserException => e
       return false
     end
-    return true
+    true
   end
 
   def token_status
@@ -34,5 +34,4 @@ class User < ActiveRecord::Base
     else :reconnect
     end
   end
-
 end

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, :set_user!
+  before_action :authenticate_user!, :set_user
 
   def index
     @users = User.all
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   private
 
-  def set_user!
+  def set_user
     @user = User.find(params[:id]) unless params[:id].nil?
   end
 end

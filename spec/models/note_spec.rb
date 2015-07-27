@@ -19,7 +19,6 @@ RSpec.describe Note, type: :model do
       Note.sync(updated_attrs)
       expect(Note.count).to eq 1
       expect(Note.first[:title]).to eq updated_attrs[:title]
-
     end
 
     it 'should not change an existing notebook with an equivalent update date' do
@@ -34,7 +33,6 @@ RSpec.describe Note, type: :model do
       expect(Note.count).to eq 1
       expect(Note.first[:title]).to eq note[:title]
     end
-
   end
 
   describe 'Creating a new note' do

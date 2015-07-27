@@ -1,5 +1,5 @@
 class NotebooksController < ApplicationController
-  before_action :set_notebook, only: [:show, :edit, :update, :destroy]
+  before_action :set_notebook, only: %i(show edit update destroy)
 
   # GET /notebooks
   # GET /notebooks.json
@@ -62,13 +62,14 @@ class NotebooksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_notebook
-      @notebook = Notebook.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def notebook_params
-      params.require(:notebook).permit(:guid, :name, :en_created_at, :en_updated_at, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_notebook
+    @notebook = Notebook.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def notebook_params
+    params.require(:notebook).permit(:guid, :name, :en_created_at, :en_updated_at, :user_id)
+  end
 end

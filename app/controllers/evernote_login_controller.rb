@@ -1,9 +1,9 @@
 class EvernoteLoginController < ApplicationController
-  rescue_from OAuth::Unauthorized, with: Proc.new { redirect_to root_path }
+  rescue_from OAuth::Unauthorized, with: proc { redirect_to root_path }
 
   def onboarding
     redirect_to new_user_registration_path unless user_signed_in?
-    redirect_to root_path unless session[:auth_token].nil?
+    redirect_to root_path if session[:auth_token].present?
   end
 
   def callback
@@ -12,7 +12,7 @@ class EvernoteLoginController < ApplicationController
   end
 
   def refresh
-    current_user.sync unless current_user.nil?
+    current_user.sync if current_user.present?
     redirect_to :back, flash: { info: 'Sync complete!' }
   end
 
@@ -24,5 +24,4 @@ class EvernoteLoginController < ApplicationController
     session.clear
     redirect_to root_path
   end
-
 end

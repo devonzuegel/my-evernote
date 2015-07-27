@@ -1,6 +1,6 @@
 class Registrations::RegistrationsController < Devise::RegistrationsController
   # before_filter :configure_sign_up_params, only: [:create]
-  before_filter :configure_account_update_params, only: [:update]
+  before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
   # def new
@@ -38,13 +38,13 @@ class Registrations::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  def after_update_path_for(resource)
+  def after_update_path_for(_resource)
     edit_user_registration_path
   end
 
   def configure_account_update_params
     permitted_params = %i(email password password_confirmation current_password name)
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(*permitted_params) }
+    devise_parameter_sanitizer.for(:account_update) { |user| user.permit(*permitted_params) }
   end
 
   # def update_resource(resource, params)
@@ -62,7 +62,7 @@ class Registrations::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up.
-  def after_sign_up_path_for(resource)
+  def after_sign_up_path_for(_resource)
     onboarding_path
   end
 
@@ -70,5 +70,4 @@ class Registrations::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-
 end

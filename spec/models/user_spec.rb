@@ -1,12 +1,11 @@
 describe User do
-
   before(:each) { @user = User.new(email: 'user@example.com') }
 
   subject { @user }
 
   it { should respond_to(:email) }
 
-  it "#email returns a string" do
+  it '#email returns a string' do
     expect(@user.email).to match 'user@example.com'
   end
 
@@ -24,7 +23,7 @@ describe User do
 
     it 'should return false when we have an invalid token' do
       allow_any_instance_of(EvernoteClient).to receive(:ping_evernote) {
-        raise Evernote::EDAM::Error::EDAMUserException, 'Invalid authentication token.'
+        fail Evernote::EDAM::Error::EDAMUserException, 'Invalid authentication token.'
       }
       @user = create(:user, auth_token: Faker::Lorem.characters(20))
       expect(@user.has_valid_token?).to eq false
@@ -49,5 +48,4 @@ describe User do
       expect(@user.token_status).to eq :reconnect
     end
   end
-
 end

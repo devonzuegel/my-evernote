@@ -1,5 +1,5 @@
 class NotesController < ApplicationController
-  before_action :set_note, only: [:show, :edit, :update, :destroy]
+  before_action :set_note, only: %i(show edit update destroy)
 
   # GET /notes
   # GET /notes.json
@@ -62,13 +62,15 @@ class NotesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_note
-      @note = Note.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def note_params
-      params.require(:note).permit(:guid, :title, :content, :en_created_at, :en_updated_at, :active, :notebook_guid, :author, :notebook_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_note
+    @note = Note.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def note_params
+    params.require(:note).permit(:guid, :title, :content, :en_created_at, :en_updated_at,
+                                 :active, :notebook_guid, :author, :notebook_id)
+  end
 end

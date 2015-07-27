@@ -32,18 +32,21 @@ group :development, :test do
   gem 'awesome_print'
   gem 'colorize'
   gem 'fuubar'
+  gem 'capybara'
+  gem 'devtools',                 git: 'https://github.com/mbj/devtools.git'
 end
+
 group :development do
   gem 'better_errors'
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
-  gem 'hub',                      :require => nil
+  gem 'hub',                      require: nil
   gem 'quiet_assets'
   gem 'rails_layout'
-  gem 'rb-fchange',               :require => false
-  gem 'rb-fsevent',               :require => false
-  gem 'rb-inotify',               :require => false
+  gem 'rb-fchange',               require: false
+  gem 'rb-fsevent',               require: false
+  gem 'rb-inotify',               require: false
   gem 'spring-commands-rspec'
 end
 
@@ -53,7 +56,6 @@ group :production do
 end
 group :test do
   gem 'webmock'
-  gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
   gem 'selenium-webdriver'

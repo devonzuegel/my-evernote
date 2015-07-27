@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Notebook, type: :model do
-
   describe 'Syncing notebooks from evernote' do
     it 'should create a new notebook if it cannot find one with the provided guid' do
       expect(Notebook.count).to eq 0

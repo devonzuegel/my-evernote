@@ -19,75 +19,74 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe NotebooksController, type: :controller do
-
   # This should return the minimal set of attributes required to create a valid
   # Notebook. As you add validations to Notebook, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     { name: Faker::Lorem.sentence, guid: Faker::Lorem.characters(20) }
-  }
+  end
 
-  let(:invalid_attributes) {
+  let(:invalid_attributes) do
     { guid: nil }
-  }
+  end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # NotebooksController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "assigns all notebooks as @notebooks" do
+  describe 'GET #index' do
+    it 'assigns all notebooks as @notebooks' do
       notebook = Notebook.create! valid_attributes
       get :index, {}, valid_session
       expect(assigns(:notebooks)).to eq([notebook])
     end
   end
 
-  describe "GET #show" do
-    it "assigns the requested notebook as @notebook" do
+  describe 'GET #show' do
+    it 'assigns the requested notebook as @notebook' do
       notebook = Notebook.create! valid_attributes
       get :show, { id: notebook.to_param }, valid_session
       expect(assigns(:notebook)).to eq(notebook)
     end
   end
 
-  describe "GET #edit" do
-    it "assigns the requested notebook as @notebook" do
+  describe 'GET #edit' do
+    it 'assigns the requested notebook as @notebook' do
       notebook = Notebook.create! valid_attributes
       get :edit, { id: notebook.to_param }, valid_session
       expect(assigns(:notebook)).to eq(notebook)
     end
   end
 
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
+  describe 'PUT #update' do
+    context 'with valid params' do
+      let(:new_attributes) do
         { title: Faker::Lorem.sentence, guid: Faker::Lorem.characters(20) }
-      }
+      end
 
-      it "updates the requested notebook" do
+      it 'updates the requested notebook' do
         notebook = Notebook.create! valid_attributes
         put :update, { id: notebook.to_param, notebook: new_attributes }, valid_session
         notebook.reload
-        skip("Add assertions for updated state")
+        skip('Add assertions for updated state')
       end
 
-      it "assigns the requested notebook as @notebook" do
+      it 'assigns the requested notebook as @notebook' do
         notebook = Notebook.create! valid_attributes
         put :update, { id: notebook.to_param, notebook: valid_attributes }, valid_session
         expect(assigns(:notebook)).to eq(notebook)
       end
 
-      it "redirects to the notebook" do
+      it 'redirects to the notebook' do
         notebook = Notebook.create! valid_attributes
-        put :update, {id: notebook.to_param, notebook: valid_attributes}, valid_session
+        put :update, { id: notebook.to_param, notebook: valid_attributes }, valid_session
         expect(response).to redirect_to(notebook)
       end
     end
 
-    context "with invalid params" do
-      it "assigns the notebook as @notebook" do
+    context 'with invalid params' do
+      it 'assigns the notebook as @notebook' do
         notebook = Notebook.create! valid_attributes
         put :update, { id: notebook.to_param, notebook: invalid_attributes }, valid_session
         expect(assigns(:notebook)).to eq(notebook)
@@ -96,9 +95,8 @@ RSpec.describe NotebooksController, type: :controller do
       it "re-renders the 'edit' template" do
         notebook = Notebook.create! valid_attributes
         put :update, { id: notebook.to_param, notebook: invalid_attributes }, valid_session
-        expect(response).to render_template("edit")
+        expect(response).to render_template('edit')
       end
     end
   end
-
 end

@@ -1,19 +1,19 @@
 require 'rails_helper'
 
-RSpec.describe "notes/show", type: :view do
+RSpec.describe 'notes/show', type: :view do
   before(:each) do
     @note = assign(:note, Note.create!(
-      :guid => "Guid",
-      :title => "Title",
-      :content => "MyText",
-      :active => false,
-      :notebook_guid => "Notebook Guid",
-      :author => "Author",
-      :notebook => nil
+                            guid: 'Guid',
+                            title: 'Title',
+                            content: 'MyText',
+                            active: false,
+                            notebook_guid: 'Notebook Guid',
+                            author: 'Author',
+                            notebook: nil
     ))
   end
 
-  it "renders attributes in <p>" do
+  it 'renders attributes in <p>' do
     render
     expect(rendered).to match(/Guid/)
     expect(rendered).to match(/Title/)

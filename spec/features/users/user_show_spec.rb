@@ -6,7 +6,6 @@ Warden.test_mode!
 #   I want to visit my user profile page
 #   So I can see my personal account data
 feature 'User profile page', :devise do
-
   after(:each) do
     Warden.test_reset!
   end
@@ -34,5 +33,4 @@ feature 'User profile page', :devise do
     Capybara.current_session.driver.header 'Referer', root_path
     visit user_path(other)
   end
-
 end
