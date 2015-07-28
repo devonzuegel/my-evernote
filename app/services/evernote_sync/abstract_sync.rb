@@ -1,20 +1,37 @@
 class AbstractSync
-  attr_accessor :generic_class
+  attr_reader :attributes
 
-  def sync(attributes = {})
-    guid = attributes.symbolize_keys!.fetch(:guid)
-    resource = generic_class.where(guid: guid).first
-    if resource.nil?
-      resource = generic_class.create(attributes)
-    elsif updated?(resource, attributes)
-      resource.update_attributes(attributes)
-    end
+  def initialize(attributes = {})
+    @attributes = attributes.symbolize_keys!
+  end
+
+  def sync
+    return model_class.create(attributes) unless resource?
+
+    resource.update_attributes(attributes) if updated?
+  end
+
+  protected
+
+  def model_class
+    fail NotImplementedError, "#{self.class}#model_class is not implemented"
   end
 
   private
 
-  def updated?(resource, attributes)
-    en_updated_at = attributes.symbolize_keys!.fetch(:en_updated_at)
-    resource[:en_updated_at].nil? || resource[:en_updated_at] < en_updated_at
+  def resource
+    @resource ||= model_class.find_by(attributes.slice(:guid))
+  end
+
+  def resource?
+    resource.present?
+  end
+
+  def updated?
+    resource.en_updated_at.blank? || resource.en_updated_at < attribute(:en_updated_at)
+  end
+
+  def attribute(name)
+    attributes.fetch(name)
   end
 end
