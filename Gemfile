@@ -20,13 +20,13 @@ gem 'evernote_oauth'
 gem 'omniauth-evernote'
 gem 'figaro'                      # github.com/laserlemon/figaro
 gem 'devtools',                 git: 'https://github.com/mbj/devtools.git'
+gem 'faker'
 
 group :development, :test do
   gem 'byebug'
   gem 'web-console',              '~> 2.0'
   gem 'spring'
   gem 'factory_girl_rails'
-  gem 'faker'
   gem 'rspec-rails'
   gem 'sqlite3'
   gem 'pry-rails'
