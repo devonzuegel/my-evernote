@@ -19,6 +19,7 @@ gem 'unicorn-rails'
 gem 'evernote_oauth'
 gem 'omniauth-evernote'
 gem 'figaro'                      # github.com/laserlemon/figaro
+gem 'devtools',                 git: 'https://github.com/mbj/devtools.git'
 
 group :development, :test do
   gem 'byebug'
@@ -38,8 +39,6 @@ group :development, :test do
 
   # rails test helpers
   gem 'shoulda-matchers', '3.0.0.rc1', require: false
-
-  gem 'devtools',                 git: 'https://github.com/mbj/devtools.git'
 end
 
 group :development do
